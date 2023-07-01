@@ -2,6 +2,8 @@
 {% block title %} Home {% endblock %}
 {% block content %}
 
+<div>
+    <div id="notification-dropdown"></div>
 <h3>Track Order</h3>
 <div class="row">
     <div class="col-8">
@@ -12,10 +14,7 @@
                 <li class="list-group-item">
                     #{{ order.pk }} {{ order.dish.title }}
                     <span class="badge bg-secondary">{{ order.status|upper }}</span>
-                    <div class="progress mt-3" role="progressbar" aria-label="Order Tracker" aria-valuenow="75"
-                      aria-valuemin="0" aria-valuemax="100">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 5%"></div>
-                    </div>
+                    
                 </li>
                 {% endfor %}
             </ul>
@@ -29,7 +28,7 @@
         </div>
     </div>
 </div>
-
+</div>
 
 
 {% endblock %}

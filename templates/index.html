@@ -2,6 +2,11 @@
 {% block title %} Home {% endblock %}
 {% block content %}
 
+
+<div hx-ext="ws" ws-connect="/ws/status/" id="websocket">
+  <div id = "my_testing_message"></div>
+</div>
+
 <h3 class="text-center">Welcome</h3>
 <div id="orderMsg"></div>
 <div class="mt-5">

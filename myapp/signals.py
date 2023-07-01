@@ -6,17 +6,31 @@ from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 
 @receiver(post_save, sender=Order)
-def update_status(sender, instance, created, **kwargs):
+def status_created(sender, instance, created, **kwargs):
     # send to channels
-    if created:
+    if instance:
+        percentage = 0
+        if instance.status == 'pending':
+            percentage = 15
+        elif instance.status == 'processing':
+            percentage = 75
+        else:
+            percentage = 100
+
+        
+        print("Now: $##############################")
+        print(instance, instance.status, percentage)
+        
+
         channel_layer = get_channel_layer()
         async_to_sync(channel_layer.group_send)(
-            'public_room',
+            'order_status',
             {
-                "type": "send_notification",
-                "message": instance.message
+                "type": "update_status",
+                "status": instance.status,
+                "percentage": percentage
             }
         )
-    print("$##############################")
-    print(instance)
-    print("$##############################")
+        print("Now, $##############################")
+    
+    print("NoT Working..............................")
