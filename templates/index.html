@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %} Home {% endblock %}
+{% block content %}
+
+<h3 class="text-center">Welcome</h3>
+<div id="orderMsg"></div>
+<div class="mt-5">
+  <div class="row col-auto">
+    {% for dish in dishes %}
+    <div class="card mx-2" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title d-flex justify-content-between">
+          {{ dish.title }}
+          <span class="badge text-bg-dark">${{ dish.price }}</span>
+        </h5>
+        <p class="card-text">{{ dish.description }} </p>
+          <button hx-get="{% url 'create_order' dish.id %}" hx-target="#orderMsg" href="#" class="btn btn-success rounded-1">Order</button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+{% endblock %}
